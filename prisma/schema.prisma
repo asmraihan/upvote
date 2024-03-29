@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String         @id
+  username          String         @unique
+  password          String?
+  profilePictureUrl String?
+  sessions          Session[]
+  OAuthAccounts     OAuthAccount[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId    String
+}
+
+model OAuthAccount {
+  id             String    @id
+  provider       String
+  providerUserId String
+  accessToken    String?
+  refreshToken   String?
+  expiresAt      DateTime?
+  userId         String
+  user           User      @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerUserId])
+}
