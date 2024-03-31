@@ -10,10 +10,15 @@ datasource db {
 model User {
   id                String         @id
   username          String         @unique
+  email             String?        @unique
   password          String?
   profilePictureUrl String?
   sessions          Session[]
   OAuthAccounts     OAuthAccount[]
+  Post              Post[]
+  Comment           Comment[]
+  Vote              Vote[]
+  CommentVote       CommentVote[]
 }
 
 model Session {
@@ -34,4 +39,60 @@ model OAuthAccount {
   user           User      @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerUserId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+
+  comments Comment[]
+  Vote     Vote[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+
+  replyToId String?
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+
+  votes     CommentVote[]
+  commentId String?
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model Vote {
+  userId String
+  user   User     @relation(fields: [userId], references: [id])
+  postId String
+  post   Post     @relation(fields: [postId], references: [id])
+  type   VoteType
+
+  @@id([userId, postId])
+}
+
+model CommentVote {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  commentId String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  type      VoteType
+
+  @@id([userId, commentId])
 }

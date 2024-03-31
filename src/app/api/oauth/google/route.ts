@@ -73,6 +73,7 @@ export const GET = async (req: NextRequest) => {
                 data: {
                     id: googleData.id,
                     username: googleData.name,
+                    email: googleData.email,
                     profilePictureUrl: googleData.picture
                 }
             })

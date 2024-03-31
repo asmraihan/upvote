@@ -45,10 +45,9 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Navbar session={user} />
-        {children}
+          {children}
           {/* div wrapping the footer so that its at bottom of page */}
-         
-          <Toaster   />
+          <Toaster />
         </ThemeProvider>
       </body>
       {/* </AuthProvider> */}
