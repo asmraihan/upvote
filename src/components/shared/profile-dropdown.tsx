@@ -43,7 +43,7 @@ export default function ProfileDropdown({ session }: any) {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem >
+                    <DropdownMenuItem onSelect={()=> router.push(`/profile/${session?.user?.id}`)}>
                         <span>Profile</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>

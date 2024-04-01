@@ -51,7 +51,7 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
 
   comments Comment[]
-  Vote     Vote[]
+  votes    Vote[]
 }
 
 model Comment {

@@ -53,32 +53,7 @@ export default function Navbar({ session }: any) {
               Create
             </Link>
 
-            <Link
-              href="/explore"
-              className={cn(
-                "transition-colors hover:text-foreground/80 text-sm font-normal",
-                pathname === "/explore"
-                  ? "text-foreground"
-                  : "text-foreground/60"
-              )}
-            >
-              Explore
-            </Link>
-
-            {session ? (
-              <Link
-                href={`/profile/${session?.user?.id}`}
-                className={cn(
-                  "transition-colors hover:text-foreground/80 text-sm font-normal",
-                  pathname.startsWith("/profile") &&
-                    session.user.id === pathname.split("/")[2]
-                    ? "text-foreground"
-                    : "text-foreground/60"
-                )}
-              >
-                Profile
-              </Link>
-            ) : null}
+     
           </div>
         </div>
         <div className="flex lg:hidden">
