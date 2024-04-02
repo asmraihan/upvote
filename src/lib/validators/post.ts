@@ -8,7 +8,9 @@ export const PostValidator = z.object({
         .max(100, { message: 'Title must be at least 100 characters' }),
 
     content: z
-        .any()
-})  
+        .any(),
+    authorId: z
+    .any(),
+})
 
 export type PostCreationRequest = z.infer<typeof PostValidator>

@@ -2,8 +2,13 @@ import { Container } from '@/components/shared/container'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import Editor from './_component/Editor'
+import { validateRequest } from '@/lib/lucia/luciaAuth'
+import { UserType } from '@/lib/types'
 
-const CreatePostPage = () => {
+const CreatePostPage = async () => {
+
+    const { user } = await validateRequest();
+
     return (
         <Container className='mt-4 lg:mt-6'>
             <div className='flex flex-col items-start gap-6'>
@@ -23,7 +28,7 @@ const CreatePostPage = () => {
 
                 <div className='w-full flex justify-between  gap-10'>
                 <div className='w-3/4'>
-                <Editor />
+                <Editor user={user} />
                 </div>
                 <div className='w-1/4'>
                     <Button type='submit' className='w-full' form='post-form'>
