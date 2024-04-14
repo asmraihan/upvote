@@ -1,12 +1,11 @@
 
 "use server";
 
-import { cookies } from "next/headers";
-import { z } from "zod";
+// import { cookies } from "next/headers";
 import { PostCreationRequest, PostValidator } from '@/lib/validators/post'
 import { prisma } from "../../../prisma/prismaClient";
 
-export const createPost = async (values: z.infer<typeof PostValidator>) => {
+export const createPost = async (values: PostCreationRequest) => {
     try {
         PostValidator.parse(values);
     } catch (error: any) {
