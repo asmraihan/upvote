@@ -12,7 +12,7 @@ import PostFeed from "./PostFeed";
 
 export default async function Home() {
   const { user } = await validateRequest();
-
+  console.log(user)
   // if (!user) {
   //   return redirect("/signin");
   // }
@@ -23,7 +23,7 @@ export default async function Home() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4  py-6">
         {/* feed */}
 
-        <PostFeed />
+        <PostFeed user={user}/>
 
         {/* post info */}
         <div className=" overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last  dark:border-gray-900">
