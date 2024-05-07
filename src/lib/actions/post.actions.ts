@@ -3,7 +3,7 @@
 
 // import { cookies } from "next/headers";
 import { PostCreationRequest, PostValidator } from '@/lib/validators/post'
-import { prisma } from "../../../prisma/prismaClient";
+import { prisma } from "@/lib/prismaClient";
 
 export const createPost = async (values: PostCreationRequest) => {
     try {

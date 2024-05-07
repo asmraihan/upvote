@@ -1,7 +1,7 @@
 import { google } from "@/lib/lucia/oauth";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../../prisma/prismaClient";
+import { prisma } from "@/lib/prismaClient";
 import { lucia } from "@/lib/lucia/luciaAuth";
 
 

@@ -7,7 +7,7 @@ import { z } from "zod";
 import { SignInSchema, SignUpSchema } from "../../../zod/auth.schemas";
 
 import { lucia, validateRequest } from "@/lib/lucia/luciaAuth";
-import { prisma } from "../../../prisma/prismaClient";
+import { prisma } from "@/lib/prismaClient";
 import { generateCodeVerifier, generateState } from "arctic";
 import { google } from "../lucia/oauth";
 import { nanoid } from 'nanoid'

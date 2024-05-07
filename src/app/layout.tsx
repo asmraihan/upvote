@@ -8,6 +8,7 @@ import { GeistSans } from "geist/font";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/shared/navbar";
 import { validateRequest } from "@/lib/lucia/luciaAuth";
+import QueryProvider from "@/lib/providers/QueryProvider";
 
 const title = "UpVote - Next";
 const description =
@@ -44,10 +45,12 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar session={user} />
-          {children}
-          {/* div wrapping the footer so that its at bottom of page */}
-          <Toaster />
+          <QueryProvider>
+            <Navbar session={user} />
+            {children}
+            {/* div wrapping the footer so that its at bottom of page */}
+            <Toaster />
+          </QueryProvider>
         </ThemeProvider>
       </body>
       {/* </AuthProvider> */}

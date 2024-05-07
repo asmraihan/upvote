@@ -1,10 +1,10 @@
-import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import { User } from "@prisma/client";
 import { Lucia } from "lucia";
 import { cookies } from "next/headers";
 import { cache } from "react";
+import { prisma } from "@/lib/prismaClient";
+import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 
-import { prisma } from "../../../prisma/prismaClient"; 
 
 const adapter = new PrismaAdapter(prisma.session, prisma.user);
 
