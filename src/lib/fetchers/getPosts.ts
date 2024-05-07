@@ -24,9 +24,9 @@ export const getPosts = async (page = 1, limit = 3) => {
       },
       take: limit,
       skip: skip,
-      // orderBy: {
-      //   createdAt: 'desc'
-      // }
+      orderBy: {
+        createdAt: 'desc'
+      }
 
     });
 

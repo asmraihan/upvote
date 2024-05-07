@@ -29,50 +29,53 @@ interface Post {
 let page = 2;
 
 const MoreFeed = ({ user }: { user: UserType | null }) => {
-    const [data, setData] = useState<any>({});
+
+    const [data, setData] = useState<any>(null);
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
 
     const { ref, inView } = useInView();
 
-/*  
- {
-    success: true,
-    totalPost: 12,
-    totalPages: 4,
-    currentPage: 16,
-    currentLimit: 3,
-    data: []
-  } 
-  */
+    /*  
+     {
+        success: true,
+        totalPost: 12,
+        totalPages: 4,
+        currentPage: 16,
+        currentLimit: 3,
+        data: []
+      } 
+      */
 
     useEffect(() => {
         if (inView && hasMore) {
-
             setLoading(true);
-            // Add a delay of 500 milliseconds
             const delay = 500;
 
             const timeoutId = setTimeout(() => {
                 getPosts(page, 3).then((res) => {
-                    console.log(res)
                     setData(res)
-                    setPosts([...posts, ...res.data]);
-                    if (res.data.length === 0) {
-                        setHasMore(false);
-                    } else {
-                        page++;
+                    // Ensure res.data is an array before spreading it
+                    if (Array.isArray(res.data)) {
+                        // @ts-ignore
+                        setPosts([...posts, ...res.data]);
+                        if (res.data.length === 0) {
+                            setHasMore(false);
+                        } else {
+                            page++;
+                        }
                     }
                 });
 
                 setLoading(false);
             }, delay);
-
             // Clear the timeout if the component is unmounted or inView becomes false
             return () => clearTimeout(timeoutId);
         }
     }, [inView, posts, loading, hasMore]);
+
+    console.log(inView, loading)
 
     return (
         <>
@@ -85,37 +88,29 @@ const MoreFeed = ({ user }: { user: UserType | null }) => {
                             return acc
                         }, 0)
 
+                        // @ts-ignore
                         const currentVote = post.votes.find(vote => vote.userId === +user?.id)
-
-                        if (index === posts.length - 1) {
-                            return (
-                                <li key={post.id} /* ref={ref} */>
-                                    <PostCard post={post} voteCount={voteCount} currentVote={currentVote} />
-                                </li>
-                            )
-                        } else {
-                            return (
-                                <li key={post.id}>
-                                    <PostCard post={post} voteCount={voteCount} currentVote={currentVote} />
-                                </li>
-                            )
-                        }
+                        return (
+                            <li key={post.id}>
+                                <PostCard post={post} voteCount={voteCount} currentVote={currentVote} />
+                            </li>
+                        )
                     })
                 }
             </ul>
             <section className="flex justify-center items-center w-full">
                 <div ref={ref}>
-                    {inView && loading && (
-                       <>
-                       {
-                        data.data?.length > 0 ? (
-                          <SVGLoader color='#C3C3C3' size={40}/>
-                        ) : (
-                            <p className="text-center text-gray-500">No more posts</p>
-                        )
-                       }
-                     
-                       </>
+                    {data && inView && loading && (
+                        <>
+                            {
+                                data.data?.length > 0 ? (
+                                    <SVGLoader color='#C3C3C3' size={40} />
+                                ) : (
+                                    <p className="text-center text-gray-500">No more posts</p>
+                                )
+                            }
+
+                        </>
                     )}
                 </div>
             </section>

@@ -8,7 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { HomeIcon } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import Link from "next/link";
-import PostFeed from "./PostFeed";
+import InitialFeed from "./_component/initialFeed";
 
 export default async function Home() {
   const { user } = await validateRequest();
@@ -22,7 +22,7 @@ export default async function Home() {
       <h1 className="font-bold text-3xl md:text-4xl">Latest Feed</h1>
       <div className="grid grid-cols-1 gap-y-4 md:gap-x-4 py-6">
         {/* feed */}
-        <PostFeed user={user} />
+        <InitialFeed user={user} />
       </div>
     </Container>
   );
