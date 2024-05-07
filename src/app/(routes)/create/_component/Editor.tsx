@@ -168,7 +168,7 @@ const Editor = ({ user }: { user: UserType | null  }) => {
     const { ref: _titleRef, ...rest } = register('title')
 
     return (
-        <div className='w-full  p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
+        <div className='w-full  p-4 bg-zinc-50 dark:bg-neutral-950 rounded-lg border border-zinc-200 dark:border-neutral-800'>
             <form id="post-form" className='w-fit' onSubmit={handleSubmit((e) => { onSubmit(e) })}>
                 <div className='prose prose-stone dark:prose-invert'>
                     <TextareaAutoSize

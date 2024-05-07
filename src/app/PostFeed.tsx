@@ -4,6 +4,7 @@ import { Comment, Post, User, Vote } from '@prisma/client'
 import React, { useState, useEffect, useRef } from 'react'
 import { useIntersectionObserver } from 'usehooks-ts'
 import PostCard from './PostCard'
+import { UserType } from '@/lib/types'
 
 interface PostFeedProps {
     initialData: Post & {
@@ -13,9 +14,11 @@ interface PostFeedProps {
     }
 }
 
-const PostFeed = ({ initialData, user }: PostFeedProps) => {
+const PostFeed = ({ user }: { user: UserType | null  }) => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [hasIntersected, setHasIntersected] = useState(false);
 
     const lastPostRef = useRef<HTMLDivElement>(null)
 
@@ -29,19 +32,26 @@ const PostFeed = ({ initialData, user }: PostFeedProps) => {
             const res = await getPosts(page);
             console.log(res.data)
             setPosts(oldPosts => [...oldPosts, ...res.data])
-            if (isIntersecting) {
-                console.log('intersecting')
-            } else {
-                console.log('not intersecting');
-            }
         };
-
+    
         fetchPosts();
+    }, [page]);
+    
+    React.useEffect(() => {
+        if (isIntersecting) {
+            if (!hasIntersected) {
+                setHasIntersected(true);
+            } else {
+                setPage(oldPage => oldPage + 1);
+            }
+        }
     }, [isIntersecting]);
+
 
     return (
         <div>
-            <ul className='flex flex-col col-span-2 space-y-6'>
+            <p>{posts.length}</p>
+            <ul className='flex flex-col col-span-6 space-y-6'>
                 {
                     posts?.map((post, index) => {
                         const voteAmnt = post.votes.reduce((acc, vote) => {
