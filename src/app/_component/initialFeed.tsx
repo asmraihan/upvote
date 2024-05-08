@@ -22,7 +22,7 @@ const InitialFeed = async ({ user }: { user: UserType | null }) => {
                         const currentVote = post.votes.find(vote => vote.userId === user?.id)
                         return (
                             <li key={post.id}>
-                                <PostCard post={post} voteCount={voteCount} currentVote={currentVote} />
+                                <PostCard post={post} commentAmt={post.comments.length} voteCount={voteCount} currentVote={currentVote} />
                             </li>
                         )
                     })

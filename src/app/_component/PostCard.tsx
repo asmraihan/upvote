@@ -4,16 +4,19 @@ import { formatTimeToNow } from '@/lib/utils';
 import Link from 'next/link';
 import React, { useRef } from 'react'
 import RenderBlock from './RenderBlock';
+import { MessageSquare } from 'lucide-react'
+import PostVoteClient from './PostVoteClient';
 
 
 interface PostCardProps {
   post: any; 
   voteCount: number;
   currentVote: any;
+  commentAmt: number;
 }
 
 
-const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote }) => {
+const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, commentAmt }) => {
 
   const pRef = useRef<HTMLParagraphElement>(null)
 
@@ -23,11 +26,11 @@ console.log(pRef.current?.clientHeight )
   return (
     <div className='rounded-md bg-white dark:bg-neutral-900 shadow'>
     <div className='px-6 py-4 flex justify-between'>
-      {/* <PostVoteClient
+      <PostVoteClient
         postId={post.id}
-        initialVotesAmt={_votesAmt}
-        initialVote={_currentVote?.type}
-      /> */}
+        initialVoteCount={voteCount}
+        initialVote={currentVote?.type}
+      />
 
       <div className='w-0 flex-1'>
         <div className='max-h-40 mt-1 text-xs text-gray-500 dark:text-gray-300'>
@@ -59,7 +62,7 @@ console.log(pRef.current?.clientHeight )
       <Link
         href={`/post/${post.id}`}
         className='w-fit flex items-center gap-2'>
-        {/* <MessageSquare className='h-4 w-4' /> {commentAmt} comments */}
+          <MessageSquare className='h-4 w-4' /> {commentAmt} comments
       </Link>
     </div>
   </div>

@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/shared/navbar";
 import { validateRequest } from "@/lib/lucia/luciaAuth";
 import QueryProvider from "@/lib/providers/QueryProvider";
+import { SessionProvider } from "@/lib/providers/SessionProvider";
 
 const title = "UpVote - Next";
 const description =
@@ -34,7 +35,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = await validateRequest();
+  const sessionData = await validateRequest();
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       {/* <AuthProvider> */}
@@ -45,12 +46,14 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            <Navbar session={user} />
-            {children}
-            {/* div wrapping the footer so that its at bottom of page */}
-            <Toaster />
-          </QueryProvider>
+          <SessionProvider value={sessionData}>
+            <QueryProvider>
+              <Navbar session={sessionData.user} />
+              {children}
+              {/* div wrapping the footer so that its at bottom of page */}
+              <Toaster />
+            </QueryProvider>
+          </SessionProvider>
         </ThemeProvider>
       </body>
       {/* </AuthProvider> */}
