@@ -12,17 +12,17 @@ interface PostCardProps {
   post: any; 
   voteCount: number;
   currentVote: any;
-  commentAmt: number;
+  commentCount: number;
 }
 
 
-const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, commentAmt }) => {
-
+const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, commentCount }) => {
   const pRef = useRef<HTMLParagraphElement>(null)
 
-console.log(pRef.current?.clientHeight )
+console.log(pRef.current?.clientHeight)
 
   console.log(post)
+  
   return (
     <div className='rounded-md bg-white dark:bg-neutral-900 shadow'>
     <div className='px-6 py-4 flex justify-between'>
@@ -62,7 +62,7 @@ console.log(pRef.current?.clientHeight )
       <Link
         href={`/post/${post.id}`}
         className='w-fit flex items-center gap-2'>
-          <MessageSquare className='h-4 w-4' /> {commentAmt} comments
+          <MessageSquare className='h-4 w-4' /> {commentCount} comments
       </Link>
     </div>
   </div>

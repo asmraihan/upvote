@@ -20,7 +20,14 @@ export const getPosts = async (page = 1, limit = 3) => {
       include: {
         votes: true,
         comments: true,
-        author: true
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            profilePictureUrl: true
+          }
+        }
       },
       take: limit,
       skip: skip,

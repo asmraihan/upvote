@@ -15,7 +15,14 @@ export async function GET(req: Request) {
         include: {
         votes: true,
         comments: true,
-        author: true
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            profilePictureUrl: true
+          }
+        }
       },
     })
 
