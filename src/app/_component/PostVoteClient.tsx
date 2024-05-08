@@ -23,7 +23,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
 }) => {
 
     const sessionData = useSession()
-
+    console.log(sessionData)
     const [voteCount, setVoteCount] = React.useState(initialVoteCount)
     const [currentVote, setCurrentVote] = React.useState(initialVote)
 
@@ -39,7 +39,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         return ref.current
     }
 
-    const prevVote = usePrevious(currentVote!)
+    const prevVote = usePrevious(currentVote as string)
 
     console.log(prevVote)
 
@@ -53,7 +53,21 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
 
     // first need check login toast
     const submitVote = (type: VoteType) => {
-        console.log(type)
+        if (!sessionData.user) {
+            toast({
+                variant: "default",
+                description: "You need to login to vote",
+            });
+            return
+        }
+
+        if(currentVote === type) {
+            setCurrentVote(undefined)
+        } else {
+            setCurrentVote(type)
+        }
+    
+
         const payload: PostVoteRequest = {
             postId,
             type
@@ -108,7 +122,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
                 variant='ghost'
                 aria-label='upvote'>
                 <ArrowBigUp
-                    className={cn('h-5 w-5 text-zinc-700 dark:text-white', {
+                    className={cn('size-6 text-zinc-700 dark:text-white', {
                         'text-emerald-500 fill-emerald-500': currentVote === 'UP',
                     })}
                 />
@@ -129,7 +143,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
                 variant='ghost'
                 aria-label='downvote'>
                 <ArrowBigDown
-                    className={cn('h-5 w-5 text-zinc-700 dark:text-white', {
+                    className={cn('size-6 text-zinc-700 dark:text-white', {
                         'text-red-500 fill-red-500': currentVote === 'DOWN',
                     })}
                 />

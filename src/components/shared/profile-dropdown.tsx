@@ -20,6 +20,7 @@ export default function ProfileDropdown({ session }: any) {
 
     const logOut = async () => {
         await signOut();
+        router.refresh();
     };
     return (
         <DropdownMenu>
