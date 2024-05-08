@@ -17,6 +17,7 @@ interface PostCardProps {
 
 
 const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, commentCount }) => {
+  
   const pRef = useRef<HTMLParagraphElement>(null)
 
 console.log(pRef.current?.clientHeight)

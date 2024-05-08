@@ -1,17 +1,14 @@
 'use client'
 
 import { Image as ImageIcon, SquareTerminal  } from 'lucide-react'
-import { FC } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import {  useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { UserType } from '@/lib/types'
 
-
 const InstantPost = ({ user }: { user: UserType | null }) => {
     const router = useRouter()
-    const pathname = usePathname()
 
     return (
         <div className=' h-full px-6 py-4 flex justify-between rounded-md gap-6 bg-white dark:bg-neutral-900 '>

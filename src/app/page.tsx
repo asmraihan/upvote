@@ -22,7 +22,7 @@ export default async function Home() {
     <Container className="mt-4 lg:mt-6">
       <h1 className="font-bold text-3xl md:text-4xl">Latest Feed</h1>
       <div className="grid grid-cols-1 gap-y-4 md:gap-x-4 py-6">
-        <InstantPost user={user} />
+        <InstantPost user={user || null} />
         {/* feed */}
         <InitialFeed user={user} />
       </div>

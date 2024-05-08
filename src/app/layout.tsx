@@ -1,15 +1,12 @@
 
-import "@/styles/globals.css"
 import type { Metadata } from "next";
-
 import { ThemeProvider } from "@/lib/theme-provider";
-
 import { GeistSans } from "geist/font";
 import { Toaster } from "@/components/ui/toaster";
-import Navbar from "@/components/shared/navbar";
 import { validateRequest } from "@/lib/lucia/luciaAuth";
-import QueryProvider from "@/lib/providers/QueryProvider";
 import { SessionProvider } from "@/lib/providers/SessionProvider";
+import Navbar from "@/components/shared/navbar";
+import "@/styles/globals.css"
 
 const title = "UpVote - Next";
 const description =
@@ -47,12 +44,10 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider value={sessionData}>
-            <QueryProvider>
-              <Navbar session={sessionData.user} />
-              {children}
-              {/* div wrapping the footer so that its at bottom of page */}
-              <Toaster />
-            </QueryProvider>
+            <Navbar session={sessionData.user} />
+            {children}
+            {/* div wrapping the footer so that its at bottom of page */}
+            <Toaster />
           </SessionProvider>
         </ThemeProvider>
       </body>
