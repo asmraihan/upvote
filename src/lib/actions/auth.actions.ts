@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { SignInSchema, SignUpSchema } from "../../../zod/auth.schemas";
 
-import { lucia, validateRequest } from "@/lib/lucia/luciaAuth";
+import { lucia, getServerSession } from "@/lib/lucia/luciaAuth";
 import { prisma } from "@/lib/prismaClient";
 import { generateCodeVerifier, generateState } from "arctic";
 import { google } from "../lucia/oauth";
@@ -114,7 +114,7 @@ export const signIn = async (values: z.infer<typeof SignInSchema>) => {
 
 export const signOut = async () => {
   try {
-    const { session } = await validateRequest();
+    const { session } = await getServerSession();
 
     if (!session) {
       return {

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { validateRequest } from "@/lib/lucia/luciaAuth";
+import { getServerSession } from "@/lib/lucia/luciaAuth";
 
 import { SignInForm } from "./_components/SignInForm";
 import { Shell } from "@/components/shared/shell";
@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { OAuthSignIn } from "./_components/oauth-signin";
 
 export default async function SignInPage() {
-  const { user } = await validateRequest();
+  const { user } = await getServerSession();
 
   if (user) {
     return redirect("/");

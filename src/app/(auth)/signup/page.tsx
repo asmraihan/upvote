@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { validateRequest } from "@/lib/lucia/luciaAuth";
+import { getServerSession } from "@/lib/lucia/luciaAuth";
 
 import { SignUpForm } from "./_components/SignUpForm";
 import {
@@ -17,7 +17,7 @@ import { Shell } from "@/components/shared/shell";
 import { OAuthSignIn } from "../signin/_components/oauth-signin";
 
 export default async function SignUpPage() {
-  const { user } = await validateRequest();
+  const { user } = await getServerSession();
 
   if (user) {
     return redirect("/");

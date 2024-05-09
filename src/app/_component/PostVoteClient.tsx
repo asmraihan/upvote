@@ -9,7 +9,7 @@ import { PostVoteRequest } from '@/lib/validators/vote';
 import { VoteType } from '@prisma/client';
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react';
 import React, { FC, startTransition, useEffect } from 'react'
-
+import { useRouter } from "next/navigation";
 interface PostVoteClientProps {
     postId: string,
     initialVoteCount: number
@@ -27,8 +27,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
     const [voteCount, setVoteCount] = React.useState(initialVoteCount)
     const [currentVote, setCurrentVote] = React.useState(initialVote)
 
-    console.log(currentVote)
-    console.log(initialVote)
+    const router = useRouter()
 
     // create a usePrevious hook to store the previous value of voteCount using useRef
     const usePrevious = (value: string) => {
@@ -61,12 +60,12 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
             return
         }
 
-        if(currentVote === type) {
+        if (currentVote === type) {
             setCurrentVote(undefined)
         } else {
             setCurrentVote(type)
         }
-    
+
 
         const payload: PostVoteRequest = {
             postId,
@@ -103,6 +102,8 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
                             setVoteCount((prev) => prev - (currentVote ? 2 : 1))
                         }
                     }
+                    // refresh router
+                    router.refresh()
 
                 }
             }).catch(error => {

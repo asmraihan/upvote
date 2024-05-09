@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { GeistSans } from "geist/font";
 import { Toaster } from "@/components/ui/toaster";
-import { validateRequest } from "@/lib/lucia/luciaAuth";
+import { getServerSession } from "@/lib/lucia/luciaAuth";
 import { SessionProvider } from "@/lib/providers/SessionProvider";
 import Navbar from "@/components/shared/navbar";
 import "@/styles/globals.css"
@@ -32,7 +32,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const sessionData = await validateRequest();
+  const sessionData = await getServerSession();
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       {/* <AuthProvider> */}

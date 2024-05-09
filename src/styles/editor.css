@@ -6,12 +6,16 @@
 .dark .ce-settings__button,
 .dark .ce-toolbar__settings-btn,
 .dark .cdx-button,
-.dark .ce-popover,
 .dark .ce-toolbar__plus:hover {
   background: theme('colors.popover.DEFAULT');
   color: inherit;
   border-color: theme('colors.border');
 }
+
+.dark .ce-popover{
+  background: white;
+}
+
 
 .dark .ce-inline-tool,
 .dark .ce-conversion-toolbar__label,

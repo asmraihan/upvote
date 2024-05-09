@@ -6,11 +6,11 @@ import { PostCreationRequest, PostValidator } from '@/lib/validators/post'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type EditorJS from '@editorjs/editorjs'
 import { uploadFiles } from '@/lib/uploadthing'
-import '@/styles/editor.css'
 import { useRouter } from 'next/navigation'
 import { toast } from "@/components/ui/use-toast";
 import { createPost } from '@/lib/actions/post.actions'
 import { UserType } from '@/lib/types'
+import '@/styles/editor.css'
 
 const Editor = ({ user }: { user: UserType | null  }) => {
     console.log(user)

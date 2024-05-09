@@ -2,12 +2,12 @@ import { Container } from '@/components/shared/container'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import Editor from './_component/Editor'
-import { validateRequest } from '@/lib/lucia/luciaAuth'
+import { getServerSession } from '@/lib/lucia/luciaAuth'
 import { UserType } from '@/lib/types'
 
 const CreatePostPage = async () => {
 
-    const { user } = await validateRequest();
+    const { user } = await getServerSession();
 
     return (
         <Container className='mt-4 lg:mt-6'>

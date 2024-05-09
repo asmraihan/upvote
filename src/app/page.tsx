@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { signOut } from "@/lib/actions/auth.actions";
 
-import { validateRequest } from "@/lib/lucia/luciaAuth";
+import { getServerSession } from "@/lib/lucia/luciaAuth";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { HomeIcon } from "lucide-react";
@@ -12,7 +12,7 @@ import InitialFeed from "./_component/initialFeed";
 import InstantPost from "./_component/InstantPost";
 
 export default async function Home() {
-  const { user } = await validateRequest();
+  const { user } = await getServerSession();
   console.log(user)
   // if (!user) {
   //   return redirect("/signin");

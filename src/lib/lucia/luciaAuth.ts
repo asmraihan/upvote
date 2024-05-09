@@ -27,7 +27,8 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-export const validateRequest = cache(async () => {
+/* validateRequest */
+export const getServerSession = cache(async () => { 
   const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
 
   if (!sessionId)

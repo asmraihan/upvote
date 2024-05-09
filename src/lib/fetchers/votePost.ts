@@ -4,7 +4,7 @@
 // import { cookies } from "next/headers";
 import { prisma } from "@/lib/prismaClient";
 import { PostVoteRequest, PostVoteValidator } from '../validators/vote';
-import { validateRequest } from "../lucia/luciaAuth";
+import { getServerSession } from "../lucia/luciaAuth";
 import { CachedPostType } from "../types";
 import { redis } from "../redis.config";
 
@@ -18,7 +18,7 @@ export const votePost = async (data: PostVoteRequest) => {
 
         console.log(postId, type, "data vote")
 
-        const user = await validateRequest()
+        const user = await getServerSession()
         console.log(user, "user vote")
 
         if (!user) {
