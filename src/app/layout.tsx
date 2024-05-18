@@ -46,7 +46,6 @@ export default async function RootLayout({
           <SessionProvider value={sessionData}>
             <Navbar session={sessionData.user} />
             {children}
-            {/* div wrapping the footer so that its at bottom of page */}
             <Toaster />
           </SessionProvider>
         </ThemeProvider>

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "preinstall": "npx only-allow pnpm",
     "postinstall": "prisma generate",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",
@@ -62,7 +63,8 @@
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.7.0",
     "usehooks-ts": "^3.1.0",
-    "zod": "^3.23.7"
+    "zod": "^3.23.7",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/editorjs__header": "^2.6.3",
