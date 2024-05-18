@@ -44,9 +44,11 @@ const page = async ({ params }: PageProps) => {
 
     if (!post && !cachedPost) return notFound()
 
+ 
 
     return (
         <Container className="mt-4 lg:mt-6">
+   
             <div className='h-full flex flex-col sm:flex-row items-center sm:items-start justify-between'>
                 <Suspense fallback={<PostVoteShell />}>
                     <PostVoteServer
@@ -73,7 +75,9 @@ const page = async ({ params }: PageProps) => {
                         {post?.title ?? cachedPost.title}
                     </h1>
 
+                {/* editor output */}
                     <RenderBlock content={post?.content ?? cachedPost.content} />
+
                     <Suspense
                         fallback={
                             <Loader2 className='h-5 w-5 animate-spin text-zinc-500' />

@@ -160,6 +160,7 @@ const Editor = ({ user }: { user: UserType | null  }) => {
                     description: "Post Submission was successful",
                 });
                 console.log("Submission  successful, should redirect to home page");
+                router.refresh()
                 router.push("/");
             }
         });

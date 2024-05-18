@@ -8,6 +8,20 @@ const InitialFeed = async ({ user }: { user: UserType | null }) => {
     const postsData = await getPosts(1, 3);
     console.log(postsData)
 
+
+    // const routeResponse = await fetch('http://localhost:3000/api/posts',{
+    //     method: "GET",
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json',
+    //     },
+    // })
+    
+    // const posts = await routeResponse.json()
+    // console.log(posts , "routeResponse")
+
+
+
     return (
         <div>
             <ul className='flex flex-col col-span-6 space-y-6'>
