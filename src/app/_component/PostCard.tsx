@@ -32,7 +32,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, comme
       <div className='w-0 flex-1'>
         <div className='max-h-40 mt-1 text-xs text-gray-500 dark:text-gray-300'>
          
-          <span>Posted by • {post.author.username}</span>{' '}
+          <span>Posted by @{post.author.username}</span>{' '}
           {formatTimeToNow(new Date(post.createdAt))}
         </div>
         <Link href={`/post/${post.id}`}>

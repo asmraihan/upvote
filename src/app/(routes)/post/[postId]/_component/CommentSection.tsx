@@ -43,7 +43,7 @@ const CommentSection = async (
           {comments
             .filter((comment) => !comment.replyToId)
             .map((topLevelComment) => {
-              const topLevelCommentVotesCount = topLevelComment.votes.reduce(
+              const topLevelCommentVoteCount = topLevelComment.votes.reduce(
                 (acc, vote) => {
                   if (vote.type === 'UP') return acc + 1
                   if (vote.type === 'DOWN') return acc - 1
@@ -62,7 +62,7 @@ const CommentSection = async (
                     <PostComment
                       comment={topLevelComment}
                       currentVote={topLevelCommentVote}
-                      votesAmt={topLevelCommentVotesCount}
+                      voteCount={topLevelCommentVoteCount}
                       postId={postId}
                     />
                   </div>
@@ -71,7 +71,7 @@ const CommentSection = async (
                   {topLevelComment.replies
                     .sort((a, b) => b.votes.length - a.votes.length) // Sort replies by most liked
                     .map((reply) => {
-                      const replyVotesAmt = reply.votes.reduce((acc, vote) => {
+                      const replyVoteCount = reply.votes.reduce((acc, vote) => {
                         if (vote.type === 'UP') return acc + 1
                         if (vote.type === 'DOWN') return acc - 1
                         return acc
@@ -88,7 +88,7 @@ const CommentSection = async (
                           <PostComment
                             comment={reply}
                             currentVote={replyVote}
-                            votesAmt={replyVotesAmt}
+                            voteCount={replyVoteCount}
                             postId={postId}
                           />
                         </div>
