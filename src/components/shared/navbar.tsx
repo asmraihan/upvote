@@ -25,11 +25,7 @@ export default function Navbar({ session }: any) {
 
   return (
     <header
-      className={`sticky top-0 border-b px-3 z-50 ${pathname === "/projects"
-          ? "bg-background"
-          : "supports-backdrop-blur:bg-background/80 backdrop-blur"
-        }`}
-    >
+      className={`sticky top-0 border-b px-3 z-50 bg-background`}>
       <nav
         className="flex items-center justify-between py-3 mx-auto max-w-7xl"
         aria-label="Global"
@@ -53,7 +49,7 @@ export default function Navbar({ session }: any) {
               Create
             </Link>
 
-     
+
           </div>
         </div>
         <div className="flex lg:hidden">
@@ -72,10 +68,10 @@ export default function Navbar({ session }: any) {
 
           {!session && (
             <Button
-             variant="default" 
-             onClick={() => signIn()}
-             className="mx-8"
-             >
+              variant="default"
+              onClick={() => signIn()}
+              className="mx-8"
+            >
               Log in
             </Button>
           )}

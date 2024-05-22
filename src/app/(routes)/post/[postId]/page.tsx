@@ -10,6 +10,7 @@ import React, { Suspense } from 'react'
 import PostVoteServer from './_component/PostVoteServer'
 import { formatTimeToNow } from '@/lib/utils'
 import RenderBlock from '@/app/_component/RenderBlock'
+import CommentSection from './_component/CommentSection'
 
 interface PageProps {
     params: {
@@ -82,7 +83,7 @@ const page = async ({ params }: PageProps) => {
                         fallback={
                             <Loader2 className='h-5 w-5 animate-spin text-zinc-500' />
                         }>
-                        {/* <CommentsSection postId={post?.id ?? cachedPost.id} /> */}
+                        <CommentSection postId={post?.id ?? cachedPost.id} />
                     </Suspense>
                 </div>
 

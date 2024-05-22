@@ -17,13 +17,9 @@ interface PostCardProps {
 
 
 const PostCard: React.FC<PostCardProps> = ({ post, voteCount, currentVote, commentCount }) => {
-  
+    console.log(post)
   const pRef = useRef<HTMLParagraphElement>(null)
 
-console.log(pRef.current?.clientHeight)
-
-  console.log(post)
-  
   return (
     <div className='rounded-md bg-white dark:bg-neutral-900 shadow'>
     <div className='px-6 py-4 flex justify-between'>

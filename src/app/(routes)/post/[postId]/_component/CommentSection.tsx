@@ -1,6 +1,8 @@
 import { getServerSession } from '@/lib/lucia/luciaAuth'
 import { prisma } from '@/lib/prismaClient'
 import React from 'react'
+import PostComment from './PostComment'
+import CreateComment from './CreateComment'
 
 interface CommentSectionProps {
     postId: string
@@ -29,17 +31,19 @@ const CommentSection = async (
         }
     })
 
+    console.log(comments, "asd")
+
     return (
         <div className='flex flex-col gap-y-4 mt-4'>
         <hr className='w-full h-px my-6' />
   
-        {/* <CreateComment postId={postId} /> */}
+        <CreateComment postId={postId}  />
   
         <div className='flex flex-col gap-y-6 mt-4'>
           {comments
             .filter((comment) => !comment.replyToId)
             .map((topLevelComment) => {
-              const topLevelCommentVotesAmt = topLevelComment.votes.reduce(
+              const topLevelCommentVotesCount = topLevelComment.votes.reduce(
                 (acc, vote) => {
                   if (vote.type === 'UP') return acc + 1
                   if (vote.type === 'DOWN') return acc - 1
@@ -55,12 +59,12 @@ const CommentSection = async (
               return (
                 <div key={topLevelComment.id} className='flex flex-col'>
                   <div className='mb-2'>
-                    {/* <PostComment
+                    <PostComment
                       comment={topLevelComment}
                       currentVote={topLevelCommentVote}
-                      votesAmt={topLevelCommentVotesAmt}
+                      votesAmt={topLevelCommentVotesCount}
                       postId={postId}
-                    /> */}
+                    />
                   </div>
   
                   {/* Render replies */}
@@ -81,12 +85,12 @@ const CommentSection = async (
                         <div
                           key={reply.id}
                           className='ml-2 py-2 pl-4 border-l-2 border-zinc-200'>
-                          {/* <PostComment
+                          <PostComment
                             comment={reply}
                             currentVote={replyVote}
                             votesAmt={replyVotesAmt}
                             postId={postId}
-                          /> */}
+                          />
                         </div>
                       )
                     })}
