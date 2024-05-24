@@ -138,6 +138,8 @@ const Editor = ({ user }: { user: UserType | null  }) => {
     const [isPending, startTransition] = useTransition()
 
     async function onSubmit(data: PostCreationRequest) {
+
+        if(!user) router.push('/signin')
         
         const blocks = await ref.current?.save()
         const payload: PostCreationRequest = {

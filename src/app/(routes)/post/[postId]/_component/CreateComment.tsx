@@ -7,20 +7,21 @@ import { useRouter } from 'next/navigation'
 import { toast } from '@/components/ui/use-toast'
 import { createComment } from '@/lib/actions/comment.actions'
 import { CommentType } from '@/lib/validators/comment'
+import { Loader2 } from 'lucide-react'
 
 interface CreateCommentProps {
     postId: string
     replyToId?: string
-  }
-  
+}
 
-const CreateComment = ({ postId, replyToId } : CreateCommentProps) => {
+
+const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
     const [input, setInput] = useState<string>('')
     const router = useRouter()
     const [isPending, startTransition] = React.useTransition()
 
     async function submitComment(data: CommentType) {
-        
+
         const payload: CommentType = {
             postId: data.postId,
             text: data.text,
@@ -62,12 +63,22 @@ const CreateComment = ({ postId, replyToId } : CreateCommentProps) => {
                 />
 
                 <div className='mt-2 flex justify-end'>
-                    <Button
-                        // isLoading={isPending}
-                        disabled={input.length === 0}
-                        onClick={() => submitComment({ postId, text: input, replyToId })}>
-                        Post
-                    </Button>
+
+                    {
+                        isPending ? <Button disabled>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Please wait
+                        </Button>
+                            :
+                            <Button
+                                // isLoading={isPending}
+                                disabled={input.length === 0}
+                                onClick={() => submitComment({ postId, text: input, replyToId })}>
+                                Post
+                            </Button>
+                    }
+
+
                 </div>
             </div>
         </div>

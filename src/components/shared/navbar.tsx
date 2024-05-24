@@ -52,6 +52,9 @@ export default function Navbar({ session }: any) {
 
           </div>
         </div>
+        
+        <Cmdk session={session} />
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -61,8 +64,7 @@ export default function Navbar({ session }: any) {
             {/* <Menu className="h-6 w-6" aria-hidden="true" /> */}
           </button>
         </div>
-        <div className="flex items-center space-x-3">
-          <Cmdk session={session} />
+        <div className="flex items-center ">
 
           {session && <ProfileDropdown session={session} />}
 

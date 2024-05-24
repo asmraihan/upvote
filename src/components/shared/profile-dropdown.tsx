@@ -13,6 +13,7 @@ import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/actions/auth.actions";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function ProfileDropdown({ session }: any) {
 
@@ -26,13 +27,12 @@ export default function ProfileDropdown({ session }: any) {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost">
-                    <Image
-                        className="w-6 h-6 transition-opacity duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
-                        src={session?.profilePictureUrl}
-                        alt="avatar"
-                        height={48}
-                        width={48}
-                    />
+                    <Avatar className='size-8'>
+                        <AvatarImage src={session?.user?.profilePictureUrl} />
+                        <AvatarFallback className='font-semibold'>
+                            {session?.user?.username[0]?.toUpperCase() ?? "U"}
+                        </AvatarFallback>
+                    </Avatar>
 
                     <span className="ml-2">{session?.username}</span>
                 </Button>
@@ -44,7 +44,7 @@ export default function ProfileDropdown({ session }: any) {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem onSelect={()=> router.push(`/profile/${session?.user?.id}`)}>
+                    <DropdownMenuItem onSelect={() => router.push(`/profile/${session?.user?.id}`)}>
                         <span>Profile</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>

@@ -4,10 +4,15 @@ import React from 'react'
 import Editor from './_component/Editor'
 import { getServerSession } from '@/lib/lucia/luciaAuth'
 import { UserType } from '@/lib/types'
+import { redirect } from 'next/navigation'
 
 const CreatePostPage = async () => {
 
     const { user } = await getServerSession();
+
+    if (!user) {
+        return redirect("/signin");
+    }
 
     return (
         <Container className='mt-4 lg:mt-6'>

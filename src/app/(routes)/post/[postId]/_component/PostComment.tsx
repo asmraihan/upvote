@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { formatTimeToNow } from '@/lib/utils'
 import VoteComment from './VoteComment'
 import { Button } from '@/components/ui/button'
-import { MessageSquare } from 'lucide-react'
+import { Loader2, MessageSquare } from 'lucide-react'
 import { useRouter } from "next/navigation";
 import { useSession } from '@/lib/providers/SessionProvider'
 import { Label } from '@/components/ui/label'
@@ -79,10 +79,10 @@ const PostComment = (
   return (
     <div className='flex flex-col'>
       <div className="flex items-center">
-        <Avatar>
+        <Avatar className='size-8'>
           <AvatarImage src={comment?.author?.profilePictureUrl!} />
-          <AvatarFallback>
-            {comment?.author?.username}
+          <AvatarFallback className='font-semibold'>
+            {comment?.author?.username[0]?.toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <div className='ml-2 flex flex-col'>
@@ -94,7 +94,7 @@ const PostComment = (
           </p>
         </div>
       </div>
-      <p className='text-sm text-zinc-900'>
+      <p className='text-sm mt-2 text-zinc-900 dark:text-white'>
         {comment.text}
       </p>
       <div className='flex gap-2 items-center flex-wrap'>
@@ -132,20 +132,28 @@ const PostComment = (
 
                   <div className='mt-2 flex justify-end gap-2'>
                     <Button
-                    tabIndex={-1}
-                    variant={'outline'}
-                    onClick={() => setIsReplying(false)}>
+                      tabIndex={-1}
+                      variant={'outline'}
+                      onClick={() => setIsReplying(false)}>
                       Cancel
                     </Button>
-                    <Button
-                      // isLoading={isPending}
-                      disabled={input.length === 0}
-                      onClick={() => {
-                        if (!input) return
-                        submitComment({ postId, text: input, replyToId: comment.replyToId ?? comment.id })
-                      }}>
-                      Post
-                    </Button>
+
+                    {
+                      isPending ? <Button disabled>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Please wait
+                      </Button>
+                        :
+                        <Button
+                          // isLoading={isPending}
+                          disabled={input.length === 0}
+                          onClick={() => {
+                            if (!input) return
+                            submitComment({ postId, text: input, replyToId: comment.replyToId ?? comment.id })
+                          }}>
+                          Post
+                        </Button>
+                    }
                   </div>
                 </div>
               </div>

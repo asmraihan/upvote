@@ -27,7 +27,7 @@ export default async function SignInPage() {
         </CardHeader>
         <CardContent className="grid gap-4">
           <OAuthSignIn />
-          {/* <div className="relative">
+          <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -36,10 +36,10 @@ export default async function SignInPage() {
                 Or continue with
               </span>
             </div>
-          </div> */}
-          {/* <SignInForm /> */}
+          </div>
+          <SignInForm />
         </CardContent>
-        {/* <CardFooter className="flex flex-wrap items-center justify-between gap-2">
+        <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
             <span className="mr-1 hidden sm:inline-block">
               Don&apos;t have an account?
@@ -59,7 +59,7 @@ export default async function SignInPage() {
           >
             Reset password
           </Link>
-        </CardFooter> */}
+        </CardFooter>
       </Card>
     </Shell>
   );

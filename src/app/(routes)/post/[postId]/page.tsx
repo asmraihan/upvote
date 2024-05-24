@@ -67,12 +67,12 @@ const page = async ({ params }: PageProps) => {
                     />
                 </Suspense>
 
-                <div className='sm:w-0 w-full flex-1 bg-white p-4 rounded-sm'>
-                    <p className='max-h-40 mt-1 truncate text-xs text-gray-500'>
+                <div className='sm:w-0 w-full flex-1 bg-white dark:bg-neutral-900 p-6 rounded-lg'>
+                    <p className='max-h-40 mt-1 truncate text-xs text-gray-500 dark:text-gray-400'>
                         Posted by @{post?.author.username ?? cachedPost.authorUsername}{' '}
                         {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
                     </p>
-                    <h1 className='text-xl font-semibold py-2 leading-6 text-gray-900'>
+                    <h1 className='text-xl font-semibold py-2 leading-6 text-gray-900 dark:text-white'>
                         {post?.title ?? cachedPost.title}
                     </h1>
 
@@ -81,7 +81,7 @@ const page = async ({ params }: PageProps) => {
 
                     <Suspense
                         fallback={
-                            <Loader2 className='h-5 w-5 animate-spin text-zinc-500' />
+                            <Loader2 className='h-5 w-5 animate-spin text-zinc-500 dark:text-zinc-400' />
                         }>
                         <CommentSection postId={post?.id ?? cachedPost.id} />
                     </Suspense>
@@ -97,7 +97,7 @@ const PostVoteShell = () => {
         <div className='flex items-center flex-col pr-6 w-20'>
             {/* upvote */}
             <div className={buttonVariants({ variant: 'ghost' })}>
-                <ArrowBigUp className='size-6 text-zinc-700' />
+                <ArrowBigUp className='size-6 text-zinc-700 dark:text-white' />
             </div>
 
             {/* score */}
@@ -107,7 +107,7 @@ const PostVoteShell = () => {
 
             {/* downvote */}
             <div className={buttonVariants({ variant: 'ghost' })}>
-                <ArrowBigDown className='size-6 text-zinc-700' />
+                <ArrowBigDown className='size-6 text-zinc-700 dark:text-white' />
             </div>
         </div>
     )
