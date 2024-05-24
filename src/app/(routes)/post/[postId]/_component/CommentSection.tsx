@@ -61,7 +61,7 @@ const CommentSection = async (
                   <div className='mb-2'>
                     <PostComment
                       comment={topLevelComment}
-                      currentVote={topLevelCommentVote}
+                      currentVote={topLevelCommentVote?.type || null}
                       voteCount={topLevelCommentVoteCount}
                       postId={postId}
                     />
@@ -87,7 +87,7 @@ const CommentSection = async (
                           className='ml-2 py-2 pl-4 border-l-2 border-zinc-200'>
                           <PostComment
                             comment={reply}
-                            currentVote={replyVote}
+                            currentVote={replyVote?.type || null}
                             voteCount={replyVoteCount}
                             postId={postId}
                           />

@@ -24,7 +24,7 @@ interface PostCommentProps {
       profilePictureUrl: string | null;
     }
   }
-  currentVote: CommentVote | undefined
+  currentVote: VoteType | null
   voteCount: number
   postId: string
 }

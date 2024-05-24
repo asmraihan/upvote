@@ -24,9 +24,8 @@ const VoteComment: FC<VoteCommentClientProps> = ({
     initialVote,
     initialVoteCount
 }) => {
-
+    console.log(commentId, initialVoteCount, initialVote, "voteComment")
     const sessionData = useSession()
-    console.log(sessionData)
     const [voteCount, setVoteCount] = React.useState(initialVoteCount)
     const [currentVote, setCurrentVote] = React.useState(initialVote)
 
@@ -45,11 +44,6 @@ const VoteComment: FC<VoteCommentClientProps> = ({
 
     console.log(prevVote)
 
-    useEffect(() => {
-        if (initialVote) {
-            setCurrentVote(initialVote)
-        }
-    }, [initialVote])
 
     console.log(voteCount, "voteCount")
 
