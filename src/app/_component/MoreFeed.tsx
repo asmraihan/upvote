@@ -11,8 +11,8 @@ import { UserType } from '@/lib/types';
 interface Vote {
     id: number;
     type: string;
-    userId: number;
-    postId: number;
+    userId: string;
+    postId: string;
 }
 
 interface Post {
@@ -88,7 +88,6 @@ const MoreFeed = ({ user }: { user: UserType | null }) => {
                             return acc
                         }, 0)
 
-                        // @ts-ignore
                         const currentVote = post.votes.find(vote => vote.userId === user?.id)
                         console.log(currentVote)
                         return (

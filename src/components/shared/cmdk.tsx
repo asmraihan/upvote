@@ -19,8 +19,9 @@ import {
   ClockIcon,
 } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
+import { UserType } from "@/lib/types";
 
-export default function Cmdk({ session }: any) {
+export default function Cmdk({ user }: { user: UserType | null  }) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
 
@@ -42,7 +43,7 @@ export default function Cmdk({ session }: any) {
         <Button
           variant="outline"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-[800px]"
+          className="inline-flex items-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-80 lg:w-[700px]"
         >
           <span className="hidden lg:inline-flex">Search in Feed...</span>
           <span className="inline-flex lg:hidden">Search...</span>
@@ -85,7 +86,7 @@ export default function Cmdk({ session }: any) {
             </CommandItem>
             <CommandItem
               onSelect={() => {
-                router.push(`/profile/${session?.user?.name}`);
+                router.push(`/profile/${user?.username}`);
                 setOpen(false);
               }}
             >

@@ -14,9 +14,10 @@ import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/actions/auth.actions";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { UserType } from "@/lib/types";
 
-export default function ProfileDropdown({ session }: any) {
-
+export default function ProfileDropdown({ user }: { user: UserType | null }) {
+    console.log(user)
     const router = useRouter();
 
     const logOut = async () => {
@@ -28,23 +29,23 @@ export default function ProfileDropdown({ session }: any) {
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost">
                     <Avatar className='size-8'>
-                        <AvatarImage src={session?.user?.profilePictureUrl} />
+                        <AvatarImage src={user?.profilePictureUrl} />
                         <AvatarFallback className='font-semibold'>
-                            {session?.user?.username[0]?.toUpperCase() ?? "U"}
+                            {user?.username[0]?.toUpperCase() ?? "U"}
                         </AvatarFallback>
                     </Avatar>
 
-                    <span className="ml-2">{session?.username}</span>
+                    <span className="ml-2">{user?.username}</span>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuItem className="flex justify-between">
-                    <div className="text-xs font-medium">{session?.user?.name ? session?.user?.name : "User"}</div>
+                    <div className="text-xs font-medium">{user?.username ? user?.username : "User"}</div>
                     <Badge>Member</Badge>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem onSelect={() => router.push(`/profile/${session?.user?.id}`)}>
+                    <DropdownMenuItem onSelect={() => router.push(`/profile/${user?.username}`)}>
                         <span>Profile</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>

@@ -9,7 +9,7 @@ import { CachedPostType } from "../types";
 import { redis } from "../redis.config";
 
 
-const CACHE_ON_COUNT = 1
+const CACHE_ON_COUNT = 10
 
 export const votePost = async (data: PostVoteRequest) => {
     try {
@@ -77,8 +77,7 @@ export const votePost = async (data: PostVoteRequest) => {
                 where: {
                     userId_postId: {
                         postId,
-                        // @ts-ignore
-                        userId: user?.user?.id
+                        userId: user?.user?.id!
                     }
                 },
                 data: {

@@ -123,14 +123,14 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
                 variant='ghost'
                 aria-label='upvote'>
                 <ArrowBigUp
-                    className={cn('size-6 text-zinc-700 dark:text-white', {
-                        'text-emerald-500 fill-emerald-500': currentVote === 'UP',
+                    className={cn('size-6 text-zinc-600 dark:text-zinc-200', {
+                        'text-emerald-500 fill-emerald-500 dark:text-emerald-600 dark:fill-emerald-600 ': currentVote === 'UP',
                     })}
                 />
             </Button>
 
             {/* score */}
-            <p className='text-center py-2 font-medium text-sm text-zinc-900 dark:text-white'>
+            <p className='text-center py-2 font-medium text-sm text-zinc-600 dark:text-zinc-200'>
                 {voteCount}
             </p>
 
@@ -144,8 +144,8 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
                 variant='ghost'
                 aria-label='downvote'>
                 <ArrowBigDown
-                    className={cn('size-6 text-zinc-700 dark:text-white', {
-                        'text-red-500 fill-red-500': currentVote === 'DOWN',
+                    className={cn('size-6 text-zinc-600 dark:text-zinc-200', {
+                        'text-red-500 fill-red-500 dark:text-red-600 dark:fill-red-600 ': currentVote === 'DOWN',
                     })}
                 />
             </Button>

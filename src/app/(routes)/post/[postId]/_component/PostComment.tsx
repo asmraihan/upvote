@@ -86,7 +86,7 @@ const PostComment = (
           </AvatarFallback>
         </Avatar>
         <div className='ml-2 flex flex-col'>
-          <p className='text-sm font-medium text-gray-900'>
+          <p className='text-sm font-medium text-gray-900 dark:text-white dark:text-opacity-80'>
             @{comment.author.username}
           </p>
           <p className='max-h-40 truncate text-xs text-zinc-500'>
@@ -100,7 +100,7 @@ const PostComment = (
       <div className='flex gap-2 items-center flex-wrap'>
         <VoteComment
           commentId={comment.id}
-          initialVote={currentVote}
+          initialVote={currentVote || null}
           initialVoteCount={voteCount} />
         <Button
           size='sm'

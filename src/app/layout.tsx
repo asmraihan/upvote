@@ -44,7 +44,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider value={sessionData}>
-            <Navbar session={sessionData.user} />
+            <Navbar user={sessionData.user} />
             {children}
             <Toaster />
           </SessionProvider>

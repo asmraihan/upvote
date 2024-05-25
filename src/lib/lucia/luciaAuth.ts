@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { Lucia } from "lucia";
 import { cookies } from "next/headers";
 import { cache } from "react";

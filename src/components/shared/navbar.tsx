@@ -12,10 +12,11 @@ import ProfileDropdown from "./profile-dropdown";
 import { ModeToggle } from "./mode-toggle";
 
 import Cmdk from "./cmdk";
-import { ArrowBigUp } from "lucide-react";
+import { ArrowBigUp, PenLine } from "lucide-react";
+import { UserType } from "@/lib/types";
 
-export default function Navbar({ session }: any) {
-  console.log(session)
+export default function Navbar({ user }: { user: UserType | null  }) {
+  console.log(user)
   const pathname = usePathname();
   const router = useRouter();
 
@@ -27,7 +28,7 @@ export default function Navbar({ session }: any) {
     <header
       className={`sticky top-0 border-b px-3 z-50 bg-background`}>
       <nav
-        className="flex items-center justify-between py-3 mx-auto max-w-7xl"
+        className="flex items-center justify-between gap-2 py-3 mx-auto max-w-7xl"
         aria-label="Global"
       >
         <div className="flex items-center gap-x-12">
@@ -40,20 +41,21 @@ export default function Navbar({ session }: any) {
               href="/create"
               prefetch={false}
               className={cn(
-                "transition-colors hover:text-foreground/80 text-sm font-normal",
+                "transition-colors hover:text-foreground/80 text-sm font-normal flex items-center gap-x-1",
                 pathname === "/create"
                   ? "text-foreground"
                   : "text-foreground/60"
               )}
             >
+              <PenLine className="size-4"/>
               Create
             </Link>
 
 
           </div>
         </div>
-        
-        <Cmdk session={session} />
+
+        <Cmdk user={user} />
 
         <div className="flex lg:hidden">
           <button
@@ -66,9 +68,9 @@ export default function Navbar({ session }: any) {
         </div>
         <div className="flex items-center ">
 
-          {session && <ProfileDropdown session={session} />}
+          {user && <ProfileDropdown user={user} />}
 
-          {!session && (
+          {!user && (
             <Button
               variant="default"
               onClick={() => signIn()}
