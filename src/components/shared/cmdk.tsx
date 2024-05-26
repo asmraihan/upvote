@@ -89,6 +89,12 @@ export default function Cmdk({ user }: { user: UserType | null }) {
   }, [debouncedQuery])
 
 
+  const runCommand = React.useCallback((command: () => unknown) => {
+    setOpen(false)
+    command()
+  }, [])
+
+
   return (
     <>
       <div className="w-full flex-1 md:w-auto md:flex-none">
@@ -143,9 +149,9 @@ export default function Cmdk({ user }: { user: UserType | null }) {
                       key={item.id}
                       className="h-9"
                       value={item.title || item.text || item.username}
-                      onSelect={() =>
-                        router.push(`/feed/${item.id}`)
-                      }
+                      onSelect={() => {
+                        runCommand(() => router.push(`/feed/${item.id}`))
+                      }}
                     >
                       <PencilLineIcon
                         className="mr-2.5 size-3 "

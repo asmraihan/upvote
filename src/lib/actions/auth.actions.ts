@@ -146,14 +146,14 @@ export const createGoogleAuthorizationURL = async () => {
 
   cookies().set("codeVerifier", codeVerifier, {
     httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    // sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
   });
 
   cookies().set("state", state, {
     httpOnly: true,
-    // secure: process.env.NODE_ENV === "production",
-    // sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
   });
   
   const authorizationURL = await google.createAuthorizationURL(
