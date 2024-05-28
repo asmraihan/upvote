@@ -16,6 +16,7 @@ export function OAuthSignIn() {
   async function oauthSignIn(provider: any) {
     console.log("🚀 ~ oauthSignIn ~ provider", provider)
     const res = await createGoogleAuthorizationURL()
+    console.log(res)
     if (res.error) {
       toast({
         variant: "destructive",

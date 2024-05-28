@@ -8,6 +8,8 @@ import { SessionProvider } from "@/lib/providers/SessionProvider";
 import Navbar from "@/components/shared/navbar";
 import "@/styles/globals.css"
 
+export const runtime = "edge";
+
 const title = "UpVote - Next";
 const description =
   "UpVote - Next is a forum where you can ask questions, share your knowledge, and learn from others."
